@@ -15,5 +15,7 @@ int main(int argc, const char * argv[]) {
 //    myController.Execute("input.txt", "output.txt");
     Person * parray[10] = {new Salesperson()};
     std::cin.get();
+    dicks
+    
     return 0;
 }
