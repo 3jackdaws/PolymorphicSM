@@ -8,6 +8,7 @@
 
 #include "Controller.hpp"
 #include <fstream>
+extern std::ofstream fout;
 #include <iostream>
 using std::ifstream;
 
@@ -16,13 +17,13 @@ Controller::Controller()
     
 }
 
-void Controller::Execute(char * in, char * out)
+void Controller::Execute(char * in)
 {
     
     ifstream fin(in);
-    std::ofstream fout(out);
     
-    if(fin.is_open() && fout.is_open())
+    
+    if(fin.is_open())
     {
         bool exit = false;
         while(!exit && !fin.eof())
@@ -30,7 +31,7 @@ void Controller::Execute(char * in, char * out)
             
             fin.getline(m_current_command, 50);
             GetCommand();
-            exit = SwitchCommand(fout);
+            exit = SwitchCommand();
         }
     }
     else
@@ -38,19 +39,39 @@ void Controller::Execute(char * in, char * out)
     
 }
 
-bool Controller::SwitchCommand(std::ofstream &fout)
+bool Controller::SwitchCommand()
 {
     switch(*arg[0])
     {
         case 'I':
         {
-            Person * temp = new Person(arg[2], arg[3], atoi(arg[1]), atoi(arg[4]), atoi(arg[5]));
-            myIsam.Insert(temp);
+            switch(*arg[6])
+            {
+                case 'S':
+                {
+                    Person * temp = new Salesperson(arg[2], arg[3], atoi(arg[1]), atoi(arg[4]), atoi(arg[5]), atof(arg[7]), atof(arg[8]));
+                    myIsam.Insert(temp);
+                    break;
+                }
+                case 'T':
+                {
+                    Person * temp = new Temp(arg[2], arg[3], atoi(arg[1]), atoi(arg[4]), atoi(arg[5]), atof(arg[7]), atof(arg[8]));
+                    myIsam.Insert(temp);
+                    break;
+                }
+                case 'M':
+                {
+                    Person * temp = new Manager(arg[2], arg[3], atoi(arg[1]), atoi(arg[4]), atoi(arg[5]), atof(arg[7]), atof(arg[8]));
+                    myIsam.Insert(temp);
+                    break;
+                }
+            }
+            
             break;
         }
         case 'R':
         {
-            myIsam.Display(atoi(arg[1]), atoi(arg[2]), fout);
+            myIsam.Display(atoi(arg[1]), atoi(arg[2]));
             break;
         }
         case 'E':
@@ -60,7 +81,7 @@ bool Controller::SwitchCommand(std::ofstream &fout)
         case 'S':
         {
             fout<<"\nSearching for "<<arg[1]<<"\n";
-            coords loc = myIsam.Search(arg[1], fout);
+            coords loc = myIsam.Search(arg[1]);
             if(loc.row != -1)
             {
                 fout<<"Found at ["<<loc.col<<", "<<loc.row<<"]"<<std::endl;
@@ -70,7 +91,7 @@ bool Controller::SwitchCommand(std::ofstream &fout)
         case 'D':
         {
             fout<<"\nSearching for "<<arg[1]<<" to delete\n";
-            coords loc = myIsam.Search(arg[1], fout);
+            coords loc = myIsam.Search(arg[1]);
             if(loc.row != -1)
             {
                 myIsam.Delete(loc);

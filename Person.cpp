@@ -8,6 +8,11 @@
 
 #include "Person.hpp"
 #include <iostream>
+using std::cout;
+
+#include <fstream>
+using std::ofstream;
+
 Person::Person()
 {
     
@@ -30,7 +35,8 @@ char * Person::GetLast()
     return m_lname;
 }
 
-std::ostream operator<<(std::ostream& out, const Person &t)
+void Person::Display()
 {
-    out<<t.m_lname<<"
+    cout<<m_lname<<", "<<m_fname<<", ID: "<<m_id<<", DOB: "<<m_birthday;
+    //fout<<m_lname<<", "<<m_fname<<", ID: "<<m_id<<", DOB: "<<m_birthday;
 }

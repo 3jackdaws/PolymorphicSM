@@ -11,12 +11,15 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
+
+
 typedef unsigned short int USHORT;
 
 const USHORT NAME_FIELD_SIZE = 30;
 
 class Person{
-    friend class ostream;
+    friend class Index;
     char m_lname[NAME_FIELD_SIZE];
     char m_fname[NAME_FIELD_SIZE];
     USHORT m_birthday;
@@ -28,8 +31,7 @@ public:
     char * GetLast();
     char * GetFirst();
     void Set(char *, char *, USHORT, USHORT, USHORT);
-    friend std::ostream& operator <<(std::ostream &out, const Person &t);
-    virtual void Display() = 0;
+    virtual void Display();
 };
 
 #endif /* Person_hpp */

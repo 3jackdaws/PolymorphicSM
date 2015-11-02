@@ -11,13 +11,17 @@
 
 #include <stdio.h>
 #include "Person.hpp"
+#include <iostream>
+using std::cout;
 
 class Salesperson : public Person
 {
     float m_sales;
     float m_commission;
 public:
-    void Display();
+    Salesperson();
+    Salesperson(char *, char *, int, int, int, float, float);
+    virtual void Display();
 };
 
 #endif /* Salesperson_hpp */

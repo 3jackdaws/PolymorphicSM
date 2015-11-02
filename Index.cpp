@@ -8,6 +8,7 @@
 
 #include "Index.hpp"
 #include <fstream>
+#include "Consts.h"
 
 using std::ofstream;
 using std::endl;
@@ -121,7 +122,7 @@ node * Index::GetHead()
     return m_head;
 }
 
-void Index::Display(std::ofstream& fout)
+void Index::Display()
 {
     node * travel = m_head;
     while(travel != nullptr)
@@ -135,7 +136,7 @@ void Index::Display(std::ofstream& fout)
     }
 }
 
-void Index::Display(int index, std::ofstream& fout)
+void Index::Display(int index)
 {
     if(index != -1)
     {
@@ -170,7 +171,7 @@ node * Index::GetLast()
     return travel;
 }
 
-int Index::Search(char * query, std::ofstream & fout)
+int Index::Search(char * query)
 {
     node * travel = m_head;
     bool found = false;
@@ -181,12 +182,12 @@ int Index::Search(char * query, std::ofstream & fout)
         if(travel == nullptr)
         {
             foundAt = -1;
-            Display(foundAt, fout);
+            Display(foundAt);
             found = true;
         }
         else if(_CASECMP(query, travel->_data->GetLast()) == 0)
         {
-            Display(foundAt, fout);
+            Display(foundAt);
             found = true;
         }
         else

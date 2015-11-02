@@ -8,6 +8,7 @@
 
 #include "Isam.hpp"
 #include <iostream>
+extern std::ofstream fout;
 
 Isam::Isam()
 {
@@ -57,7 +58,7 @@ bool Isam::Delete(coords loc)
     return true;
 }
 
-coords Isam::Search(char * query, std::ofstream & fout)
+coords Isam::Search(char * query)
 {
     int col = 0;
     coords f;
@@ -66,7 +67,7 @@ coords Isam::Search(char * query, std::ofstream & fout)
     {
         if(m_col[col +1]->GetFirst()[0] == '\0' || _CASECMP(m_col[col+1]->GetFirst(), query) > 0)
         {
-            f.row = m_col[col]->Search(query, fout);
+            f.row = m_col[col]->Search(query);
             done = true;
         }
         else
@@ -102,13 +103,13 @@ void Isam::ShiftUp(int offset)
     }
 }
 
-void Isam::Display(int col1, int col2, std::ofstream &fout)
+void Isam::Display(int col1, int col2)
 {
     fout<<"\nDisplaying row "<<col1<<" through row "<<col2<<"."<<std::endl;
     for(int i = col1; i<col2+1; ++i)
     {
         fout<<"-------ROW "<<i<<"-------"<<std::endl;
-        m_col[i]->Display(fout);
+        m_col[i]->Display();
     }
 }
 

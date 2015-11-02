@@ -19,6 +19,7 @@
 #include <fstream>
 #include "Person.hpp"
 
+
 const int MAX_ROW_SIZE = 10;
 struct node
     {
@@ -41,9 +42,9 @@ public:
     void SetHead(node *);
     node * CreateNode(Person *);
     node * GetLast();
-    void Display(std::ofstream&);
-    void Display(int, std::ofstream&);
-    int Search(char *, std::ofstream &);
+    void Display();
+    void Display(int);
+    int Search(char *);
 };
 
 #endif /* Index_hpp */

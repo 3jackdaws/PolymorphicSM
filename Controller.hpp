@@ -10,8 +10,17 @@
 #define Controller_hpp
 
 #include <stdio.h>
-#include "Isam.hpp"
 #include <fstream>
+
+
+#include "Isam.hpp"
+
+#include "Salesperson.hpp"
+#include "Temp.hpp"
+#include "Manager.hpp"
+
+
+
 
 
 class Controller
@@ -21,8 +30,8 @@ class Controller
     char m_current_command[60];
 public:
     Controller();
-    void Execute(char * in, char * out);
-    bool SwitchCommand(std::ofstream &);
+    void Execute(char * in);
+    bool SwitchCommand();
     void GetCommand();
     void DisplayAll();
 };

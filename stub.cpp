@@ -5,17 +5,21 @@
 //  Created by Ian Murphy on 10/22/15.
 //  Copyright © 2015 Ian Murphy. All rights reserved.
 //
+#include <fstream>
+extern std::ofstream fout;
 
+
+const char * output = "output.txt";
 #include <iostream>
 #include "Controller.hpp"
-#include "Salesperson.hpp"
+
 
 int main(int argc, const char * argv[]) {
-//    Controller myController;
-//    myController.Execute("input.txt", "output.txt");
-    Person * parray[10] = {new Salesperson()};
+    
+    Controller myController;
+    myController.Execute("input.txt");
     std::cin.get();
-    dicks
+    
     
     return 0;
 }

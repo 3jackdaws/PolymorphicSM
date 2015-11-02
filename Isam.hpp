@@ -11,6 +11,7 @@
 #include "Index.hpp"
 #include <stdio.h>
 #include <fstream>
+
 const int MAX_COL_HEIGHT = 15;
 struct coords
 {
@@ -25,9 +26,9 @@ public:
     Isam();
     void Insert(Person *);
     bool Delete(coords);
-    coords Search(char *, std::ofstream &);
+    coords Search(char *);
     void ShiftDown(int);
     void ShiftUp(int);
-    void Display(int, int, std::ofstream&);
+    void Display(int, int);
 };
 #endif /* Isam_hpp */
